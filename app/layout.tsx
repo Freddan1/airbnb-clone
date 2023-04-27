@@ -1,11 +1,14 @@
 
-import Navbar from './components/Navbar/Navbar'
-import RegisterModal from './components/modals/RegisterModal'
 import './globals.css'
 import { Nunito } from 'next/font/google'
-import ToasterProvider from './providers/ToastersProvider'
+
+import Navbar from './components/Navbar/Navbar'
+import RegisterModal from './components/modals/RegisterModal'
 import LoginModal from './components/modals/LoginModal'
+import RentModal from './components/modals/RentModal'
+
 import getCurrentUser from './actions/getCurrentUser'
+import ToasterProvider from './providers/ToastersProvider'
 
 
 export const metadata = {
@@ -27,6 +30,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ToasterProvider />
+        <RentModal />
         <LoginModal />
         <RegisterModal />
         <Navbar currentUser={currentUser}/>
