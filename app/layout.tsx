@@ -1,8 +1,14 @@
 
-import Navbar from './components/Navbar/Navbar'
-import RegisterModal from './components/modals/RegisterModal'
 import './globals.css'
 import { Nunito } from 'next/font/google'
+
+import Navbar from './components/Navbar/Navbar'
+import RegisterModal from './components/modals/RegisterModal'
+import LoginModal from './components/modals/LoginModal'
+import RentModal from './components/modals/RentModal'
+
+import getCurrentUser from './actions/getCurrentUser'
+import ToasterProvider from './providers/ToastersProvider'
 
 
 export const metadata = {
@@ -14,16 +20,20 @@ const font = Nunito ({
   subsets: ["latin"],
 })
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
       <body className={font.className}>
+        <ToasterProvider />
+        <RentModal />
+        <LoginModal />
         <RegisterModal />
-        <Navbar/>
+        <Navbar currentUser={currentUser}/>
         {children}
         </body>
     </html>
